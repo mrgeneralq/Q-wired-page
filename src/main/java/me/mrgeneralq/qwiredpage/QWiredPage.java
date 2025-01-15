@@ -5,9 +5,9 @@ import gearth.extensions.Extension;
 import gearth.extensions.ExtensionInfo;
 import gearth.protocol.HMessage;
 import gearth.protocol.HPacket;
-import me.mrgeneralq.qwiredpage.parsers.QCatalogIndex;
-import me.mrgeneralq.qwiredpage.parsers.QCatalogPage;
-import me.mrgeneralq.qwiredpage.parsers.QCatalogPageIndex;
+import me.mrgeneralq.qwiredpage.parsers.CatalogIndex;
+import me.mrgeneralq.qwiredpage.parsers.CatalogPage;
+import me.mrgeneralq.qwiredpage.parsers.CatalogPageIndex;
 import me.mrgeneralq.qwiredpage.services.Bootstrapper;
 import me.mrgeneralq.qwiredpage.services.ICatalogIndexService;
 
@@ -46,8 +46,8 @@ public class QWiredPage extends Extension {
     }
 
     private void onCatalogIndex(HMessage hMessage) {
-        QCatalogIndex qCatalogIndex = new QCatalogIndex(hMessage.getPacket());
-        QCatalogPageIndex root = qCatalogIndex.getRoot();
+        CatalogIndex qCatalogIndex = new CatalogIndex(hMessage.getPacket());
+        CatalogPageIndex root = qCatalogIndex.getRoot();
 
         if(!qCatalogIndex.getCatalogType().equals("BUILDERS_CLUB")) {
             return;
@@ -55,10 +55,10 @@ public class QWiredPage extends Extension {
 
         hMessage.setBlocked(true);
         ICatalogIndexService catalogIndexService = bootstrapper.getCatalogIndexService();
-        QCatalogPageIndex wiredPageIndex = catalogIndexService.findPageIndexByName(root, "wired2");
-        QCatalogPageIndex variablePageIndex = catalogIndexService.findPageIndexByName(root, "wired_variables_parent");
+        CatalogPageIndex wiredPageIndex = catalogIndexService.findPageIndexByName(root, "wired2");
+        CatalogPageIndex variablePageIndex = catalogIndexService.findPageIndexByName(root, "wired_variables_parent");
 
-        for(QCatalogPageIndex variableCategory : variablePageIndex.getChildren()){
+        for(CatalogPageIndex variableCategory : variablePageIndex.getChildren()){
             wiredPageIndex.getChildren().add(variableCategory);
         }
 
@@ -70,7 +70,7 @@ public class QWiredPage extends Extension {
     private void onCatalogPage(HMessage hMessage) {
 
         HPacket packet = hMessage.getPacket();
-        QCatalogPage catalogPage = new QCatalogPage(packet);
+        CatalogPage catalogPage = new CatalogPage(packet);
 
         if(catalogPage.getPageId() != 1002){
             return;

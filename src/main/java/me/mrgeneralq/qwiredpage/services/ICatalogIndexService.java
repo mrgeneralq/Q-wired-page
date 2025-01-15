@@ -1,9 +1,9 @@
 package me.mrgeneralq.qwiredpage.services;
 
-import me.mrgeneralq.qwiredpage.parsers.QCatalogPageIndex;
+import me.mrgeneralq.qwiredpage.parsers.CatalogPageIndex;
 
 public interface ICatalogIndexService {
 
-    QCatalogPageIndex findPageIndexByName(QCatalogPageIndex root, String name);
+    CatalogPageIndex findPageIndexByName(CatalogPageIndex root, String name);
 
 }
