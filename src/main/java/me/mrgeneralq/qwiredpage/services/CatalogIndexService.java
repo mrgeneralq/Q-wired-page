@@ -1,16 +1,16 @@
 package me.mrgeneralq.qwiredpage.services;
 
-import me.mrgeneralq.qwiredpage.parsers.QCatalogPageIndex;
+import me.mrgeneralq.qwiredpage.parsers.CatalogPageIndex;
 
 public class CatalogIndexService implements ICatalogIndexService {
 
-    public QCatalogPageIndex findPageIndexByName(QCatalogPageIndex root, String name) {
+    public CatalogPageIndex findPageIndexByName(CatalogPageIndex root, String name) {
         // Recursive function to find the page by name in the children of the root
-        for (QCatalogPageIndex child : root.getChildren()) {
+        for (CatalogPageIndex child : root.getChildren()) {
             if (child.getPageName().equals(name)) {
                 return child; // Found the page, return it
             }
-            QCatalogPageIndex result = findPageIndexByName(child, name); // Search recursively
+            CatalogPageIndex result = findPageIndexByName(child, name); // Search recursively
             if (result != null) {
                 return result; // Found in a deeper level, return the result
             }
